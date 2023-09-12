@@ -39,7 +39,6 @@
             label4 = new Label();
             panel2 = new Panel();
             panel3 = new Panel();
-            panel4 = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -82,7 +81,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(390, 48);
             panel1.TabIndex = 6;
-            panel1.Paint += panel1_Paint;
             panel1.MouseDown += panel1_MouseDown_1;
             // 
             // label1
@@ -162,21 +160,12 @@
             panel3.Size = new Size(366, 1);
             panel3.TabIndex = 10;
             // 
-            // panel4
-            // 
-            panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 230);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(390, 47);
-            panel4.TabIndex = 11;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(390, 277);
-            Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(label4);
@@ -208,6 +197,5 @@
         private Panel panel2;
         private Panel panel3;
         private Label label1;
-        private Panel panel4;
     }
 }

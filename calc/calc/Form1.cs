@@ -1,8 +1,10 @@
+using System;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace calc
 {
@@ -16,19 +18,10 @@ namespace calc
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-
         public Form1()
         {
             InitializeComponent();
             button3.FlatAppearance.BorderSize = 0;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,13 +38,6 @@ namespace calc
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private bool enableMoving = false;
-        private Point initialClickedPoint;
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -80,8 +66,11 @@ namespace calc
                 int positionValue = digit * (int)(Math.Pow(binaryBase, number.Length - 1 - i));
                 decimalValue += positionValue;
             }
+            if (decimalValue == 0)
+            {
+                textBox1.Clear();
+            }
             textBox2.Text = decimalValue.ToString();
-
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -105,14 +94,19 @@ namespace calc
                     else
                     {
                         int decimalNumber = (int)Convert.ToInt32(textBox2.Text);
+
                         textBox1.Text = Convert.ToString(decimalNumber, 2);
+
+                        if (textBox1.Text == "")
+                        {
+                            textBox2.Clear();
+                        }
                     }
                 }
                 catch (ArithmeticException ex)
                 {
-                    MessageBox.Show("The entered number is to big", "ArithmeticException", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBox1.Text = "";
-                    textBox2.Text = "";
+                    //MessageBox.Show("The entered number is to big", "ArithmeticException", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox2.Text = "2147483647";
                 }
             }
         }
